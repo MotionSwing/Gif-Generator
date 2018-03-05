@@ -1,4 +1,4 @@
-# GifTastic
+# Gif Generator
 
 ## Purpose
 
