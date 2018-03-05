@@ -27,7 +27,7 @@ $(document).ready(function(){
 		},
 		getGifsOf: function(item){
 			// Setup Query String
-			queryURL = "http://api.giphy.com/v1/gifs/search?q="+ item +"&api_key=GNMNbc2t00Lgf7QWChNs9lquU7xNpDdp&limit=10"
+			queryURL = "https://api.giphy.com/v1/gifs/search?q="+ item +"&api_key=GNMNbc2t00Lgf7QWChNs9lquU7xNpDdp&limit=10"
 			$.ajax({
 				url: queryURL,
 				method: "GET"
