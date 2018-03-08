@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Passion+One');
+
 * {
 	box-sizing: border-box;
 }
@@ -41,7 +43,7 @@ main {
 
 /* Input Form */
 
-#animal-form {
+#input-form {
 	position: absolute;
 	right: 20px;
 	/*left: 70%;*/
@@ -63,7 +65,7 @@ input[type='text'] {
 	margin-top: 5px;
 }
 
-#addAnimal {
+#addTopic {
 	border: 0;
 	background-color: teal;
 	color: #fff;
@@ -71,18 +73,21 @@ input[type='text'] {
     padding: 7px;
     margin-top: 5px;
     outline: 0;
+    cursor: pointer;
 }
 
-/* Displayed Images */
+/*---------------------*/
+/*--- Display Images---*/
+/*---------------------*/
 
-#animals {
+#gifContent {
 	width: 70%;
 	display: flex;
 	flex-flow: row wrap;
 	align-items: flex-start;
 }
 
-#animals img {
+#gifContent img {
 	margin: 10px;
 }
 
@@ -102,11 +107,90 @@ figcaption {
 
 footer {
 	position: fixed;
-	right: 10px;
-	bottom: 10px;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #000;
+	border-top: .3125rem solid #ccc;
+	color: #666;
+	font-family: "Passion One", Arial, sans-serif;
+}
+
+.main-footer {
+	display: flex;
+	justify-content: space-between;
+	padding: 15px 0;
 }
 
 footer a {
 	text-decoration: none;
-	color: #000;
+	color: #666;
+}
+
+.copyright {
+	margin-left: 1rem;
+}
+
+.links {
+	margin-right: 1rem;
+}
+
+.links ul {
+	display: flex;
+	flex-flow: row nowrap;
+}
+
+.links li {
+	margin-left: 1rem;
+	cursor: pointer;
+}
+
+footer a:hover,
+.links li:hover {
+	color: #fff;
+}
+
+.link-details {
+	background-color: #000;
+	height: 0;
+	width: 100%;
+	transition: height 500ms;
+}
+
+.expand {
+	height: 100px;
+}
+
+.theme-list {
+	display: flex;
+}
+
+.theme-option {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    right: -150px;
+    bottom: 45px;
+    border-radius: 10px;
+    background-color: #999;
+    border: 3px solid #ccc;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.theme-option:hover::after {
+	content: attr(data-theme-name);
+    display: block;
+    position: relative;
+    top: 15%;
+    width: 100px;
+	background-color: rgba(255,255,255,.6);
+    text-align: center;
+    color: #000;
+    animation: spring_label 500ms forwards;
+}
+
+@keyframes spring_label {
+	0% {top: -10%;}
+	100% {top: 15%;}
 }
