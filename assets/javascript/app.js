@@ -1,12 +1,9 @@
 $(document).ready(function(){
 
 	const app = {
-		topics: ["dog","cat","rabbit","hamster","skunk","goldfish","bird","ferret",
-			"turtle","sugar glider","chinchilla","hedgehog","hermit crab","gerbil","pygmy goat",
-			"chicken","capybara","teacup pig","serval","salamander","frog"
-		],
 		selectedTheme: 0,
-		footerStatus: "closed",
+		footerThemeStatus: "closed",
+		footerAboutStatus: "closed",
 		initialize: function() {
 			// Display the first theme
 			app.switchToTheme(app.selectedTheme);
@@ -21,7 +18,6 @@ $(document).ready(function(){
 			$("#input-form label").text(themes[app.selectedTheme].prompt);
 			$("#input-form input[type='text']").attr('placeholder',themes[app.selectedTheme].suggestion);
 			for (var i = 0; i < themes[app.selectedTheme].topics.length; i++) {
-				// app.addTopicButton(app.topics[i]);
 				app.addTopicButton(themes[app.selectedTheme].topics[i]);
 			}
 		},
@@ -104,8 +100,7 @@ $(document).ready(function(){
 				url: queryURL,
 				method: "GET"
 			}).then(function(response) {
-				console.log(response);
-				console.log(response.data[0].images.fixed_width_small_still.url);
+				// console.log(response);
 				el.css({
 					'background-image': 'url('+ response.data[0].images.fixed_width_small_still.url +')',
 					'background-size': 'cover'
@@ -114,14 +109,12 @@ $(document).ready(function(){
 		},
 		showThemeButtons: function(){
 			const themesWrapper = $("<div class='themes'>");
-			const themesList = $("<ul class='themes-list'>");
-			themesWrapper.append(themesList);
 			$(".link-details").append(themesWrapper);
 			var launch;
 			for (let i = 0; i < themes.length; i++) {
 				launch = setTimeout(function(){
-					const theme = $("<li class='theme-option' data-theme-name='"+ themes[i].name.toUpperCase() +"' data-theme='"+ i +"'>");
-					themesList.append(theme);
+					const theme = $("<button class='theme-option' data-theme-name='"+ themes[i].name.toUpperCase() +"' data-theme='"+ i +"'>");
+					themesWrapper.append(theme);
 					app.setBackgroundAsGif(themes[i].topics[Math.floor(Math.random() * themes[i].topics.length)], $(".theme-option[data-theme='"+ i +"']"));
 					$(".theme-option[data-theme='"+ i +"']").animate({"right": 310 - (i * 100)}, 1000);
 				
@@ -133,6 +126,13 @@ $(document).ready(function(){
 					});
 				},750 * i);
 			}
+		},
+		showAbout: function () {
+			const title = $("<h2 class='app-title'>").text("Gif Generator"); 
+			const descr = $("<p>").text("This dynamic web page displays 10 random "+ 
+				"gifs of your choosing based on which button you click. You can add "+
+				"new buttons by entering a topic to the right of the page.");
+			$(".link-details").append(title,descr);
 		},
 		updateFooter: function(){
 			$("footer a").wrap('<div class="main-footer"></div>');
@@ -147,15 +147,27 @@ $(document).ready(function(){
 			var expandedDiv = $("<div class='link-details'>");
 			$("footer").prepend(expandedDiv);
 
-			$("#themes-link").on('click touchstart', function(event) {
+			$("footer .links").on('click touchstart', '#themes-link', function(event) {
 				event.preventDefault();
-				if(app.footerStatus === "closed"){
-					$(".link-details").addClass('expand');
+				app.footerAboutStatus = "closed";
+				if(app.footerThemeStatus === "closed" || app.footerAboutStatus === "expanded"){
+					$(".link-details").addClass('expand').empty();
 					app.showThemeButtons();
-					app.footerStatus = "expanded";
-				}else {
+					app.footerThemeStatus = "expanded";
+				}else if (app.footerThemeStatus === "expanded"){
 					$(".link-details").removeClass('expand').empty();
-					app.footerStatus = "closed";
+					app.footerThemeStatus = "closed";
+				}
+			}).on('click touchstart', '#about-link', function(event) {
+				event.preventDefault();
+				app.footerThemeStatus = "closed";
+				if(app.footerAboutStatus === "closed" || app.footerThemeStatus === "expanded"){
+					$(".link-details").addClass('expand').empty();
+					app.showAbout();
+					app.footerAboutStatus = "expanded";
+				}else if(app.footerAboutStatus === "expanded"){
+					$(".link-details").removeClass('expand').empty();
+					app.footerAboutStatus = "closed";
 				}
 			});
 		}

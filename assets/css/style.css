@@ -1,16 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Passion+One');
 
-* {
-	box-sizing: border-box;
-}
+* {box-sizing: border-box;}
 
-body {
-	padding: 20px;
-}
-
-main {
-	display: flex;
-}
+body {padding: 20px;}
 
 /* Buttons */
 .buttons {
@@ -46,7 +38,6 @@ main {
 #input-form {
 	position: absolute;
 	right: 20px;
-	/*left: 70%;*/
 }
 
 label,
@@ -86,9 +77,7 @@ input[type='text'] {
 	align-items: flex-start;
 }
 
-#gifContent img {
-	margin: 10px;
-}
+#gifContent img {margin: 10px;}
 
 figure {
 	display: inline-block;
@@ -126,13 +115,9 @@ footer a {
 	color: #666;
 }
 
-.copyright {
-	margin-left: 1rem;
-}
+.copyright {margin-left: 1rem;}
 
-.links {
-	margin-right: 1rem;
-}
+.links {margin-right: 1rem;}
 
 .links ul {
 	display: flex;
@@ -150,19 +135,17 @@ footer a:hover,
 }
 
 .link-details {
+	display: flex;
 	background-color: #000;
 	height: 0;
 	width: 100%;
 	transition: height 500ms;
+	align-items: center;
 }
 
-.expand {
-	height: 100px;
-}
+.expand {height: 100px;}
 
-.theme-list {
-	display: flex;
-}
+.themes {display: flex;}
 
 .theme-option {
     position: absolute;
@@ -175,18 +158,35 @@ footer a:hover,
     border: 3px solid #ccc;
     cursor: pointer;
     overflow: hidden;
+    padding: 0;
+    outline: 0;
 }
 
+.theme-option:focus,
+.theme-option:hover {
+	border-color: rgb(255,153,51);
+}
+
+.theme-option:focus::after,
 .theme-option:hover::after {
 	content: attr(data-theme-name);
     display: block;
     position: relative;
-    top: 15%;
-    width: 100px;
-	background-color: rgba(255,255,255,.6);
+    /*top: 15%;*/
+    /*width: 100px;*/
+    margin-top: -30px;
+	background-color: rgba(255,255,255,0.6);
+	background-color: rgba(255,153,51,0.6);
     text-align: center;
     color: #000;
     animation: spring_label 500ms forwards;
+    font-family: "Passion One", Arial, sans-serif;
+}
+
+.app-title {
+	font-size: 25px;
+    width: 20%;
+    padding: 20px;
 }
 
 @keyframes spring_label {
