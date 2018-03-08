@@ -123,7 +123,8 @@ $(document).ready(function(){
 					app.setBackgroundAsGif(themes[i].topics[Math.floor(Math.random() * themes[i].topics.length)], $(".theme-option[data-theme='"+ i +"']"));
 					$(".theme-option[data-theme='"+ i +"']").animate({"right": 310 - (i * 100)}, 1000);
 				
-					$(".theme-option").on('click', function(event) {
+					$(".theme-option").on('click touchstart', function(event) {
+						event.preventDefault();
 						app.selectedTheme = $(this).attr('data-theme');
 						$("body").removeClass().addClass(themes[app.selectedTheme].name);
 						app.switchToTheme(app.selectedTheme);
@@ -144,7 +145,8 @@ $(document).ready(function(){
 			var expandedDiv = $("<div class='link-details'>");
 			$("footer").prepend(expandedDiv);
 
-			$("#themes-link").on('click', function(event) {
+			$("#themes-link").on('click touchstart', function(event) {
+				event.preventDefault();
 				if(app.footerStatus === "closed"){
 					$(".link-details").addClass('expand');
 					app.showThemeButtons();
