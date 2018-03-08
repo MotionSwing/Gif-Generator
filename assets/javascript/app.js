@@ -29,6 +29,7 @@ $(document).ready(function(){
 			const newButton = $("<button>").text(topic);
 			const newDiv = $("<div>").append(newButton);
 			$('.buttons').append(newDiv);
+			$("#topic-input").val('');
 
 			// Remove listener from existing buttons and setup new listener on all buttons
 			$('.buttons button').off().on('click touchstart', function(event) {
@@ -70,7 +71,8 @@ $(document).ready(function(){
 						"pause-url": response.data[i].images.fixed_width_still.url,
 						"status": "paused"
 					});
-					img.on('click', function() {
+					img.on('click touchstart', function(event) {
+						event.preventDefault();
 						if($(this).data('status') === "paused") {
 							$(this).data('status','playing');
 							$(this).attr('src', $(this).data('play-url'));

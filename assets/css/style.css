@@ -56,7 +56,6 @@ input {
 
 input[type='text'] {
 	position: relative;
-	/*right: 10px;*/
 	width: 350px;
 	border-radius: 5px;
 	border: 1px solid #666;
@@ -193,4 +192,15 @@ footer a:hover,
 @keyframes spring_label {
 	0% {top: -10%;}
 	100% {top: 15%;}
+}
+
+@media screen and (max-width: 576px) {
+	#input-form {
+		position: relative;
+		margin: 0 20%;
+		margin-bottom: 20px;
+	}
+	input[type='text'] {
+		width: 100%;
+	}
 }
