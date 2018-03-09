@@ -175,7 +175,7 @@ $(document).ready(function(){
 
 	app.initialize();
 
-	// Event Handler for adding a new Animal
+	// Event Handler for adding a new Topic
 	$('#addTopic').on('click', function(event) {
 		event.preventDefault();
 		const selectedTopic = $('#topic-input').val();
@@ -187,7 +187,7 @@ $(document).ready(function(){
 
 const themes = [
 	{
-		"name": "animal",
+		"name": "animals",
 		"topics": ["dog","cat","rabbit","hamster","skunk","goldfish","bird",
 			"ferret","turtle","sugar glider","chinchilla","hedgehog",
 			"hermit crab","gerbil","pygmy goat","chicken","capybara","teacup pig",
@@ -203,13 +203,13 @@ const themes = [
 		"suggestion": "Enter a character name"
 	},
 	{
-		"name": "movie",
+		"name": "movies",
 		"topics": ["Men in Black","Jurassic Park","Mad Max","Star Wars","Jumanji","Frozen"],
 		"prompt": "Add a Movie",
 		"suggestion": "Enter a movie"
 	},
 	{
-		"name": "game",
+		"name": "games",
 		"topics": ["Mario","Tomb Raider","Halo","Metal Gear Solid","Final Fantasy",
 			"Portal","Minecraft","Grand Theft Auto","Sonic The Hedgehog","Donkey Kong"],
 		"prompt": "Add a Video Game",
