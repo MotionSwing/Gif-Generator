@@ -153,7 +153,7 @@ footer a:hover,
     height: 90px;
     right: -150px;
     bottom: 45px;
-    border-radius: 10px;
+    border-radius: 50%;
     background-color: #999;
     border: 3px solid #ccc;
     cursor: pointer;
@@ -162,19 +162,16 @@ footer a:hover,
     outline: 0;
 }
 
-.theme-option:focus,
+.theme-option.active,
 .theme-option:hover {
 	border-color: rgb(255,153,51);
 }
 
-.theme-option:focus::after,
+.theme-option.active::after,
 .theme-option:hover::after {
 	content: attr(data-theme-name);
     display: block;
     position: relative;
-    /*top: 15%;*/
-    /*width: 100px;*/
-    margin-top: -30px;
 	background-color: rgba(255,255,255,0.6);
 	background-color: rgba(255,153,51,0.6);
     text-align: center;
@@ -183,15 +180,15 @@ footer a:hover,
     font-family: "Passion One", Arial, sans-serif;
 }
 
+@keyframes spring_label {
+	0% {top: -10%;}
+	100% {top: 15%;}
+}
+
 .app-title {
 	font-size: 25px;
     width: 20%;
     padding: 20px;
-}
-
-@keyframes spring_label {
-	0% {top: -10%;}
-	100% {top: 15%;}
 }
 
 @media screen and (max-width: 576px) {

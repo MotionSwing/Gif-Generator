@@ -95,6 +95,7 @@ $(document).ready(function(){
 			queryURL += "&api_key="+ api;
 			queryURL += "&limit=" + 1;
 			queryURL += "&offset=" + offset;
+			queryURL += "&rating=g";
 
 			$.ajax({
 				url: queryURL,
@@ -108,12 +109,16 @@ $(document).ready(function(){
 			});
 		},
 		showThemeButtons: function(){
-			const themesWrapper = $("<div class='themes'>");
+			const themesWrapper = $("<ul class='themes'>");
 			$(".link-details").append(themesWrapper);
 			var launch;
 			for (let i = 0; i < themes.length; i++) {
 				launch = setTimeout(function(){
-					const theme = $("<button class='theme-option' data-theme-name='"+ themes[i].name.toUpperCase() +"' data-theme='"+ i +"'>");
+					const theme = $("<li class='theme-option' data-theme-name='"+ themes[i].name.toUpperCase() +"' data-theme='"+ i +"'>");
+					if (i === 0){
+						theme.addClass('active');
+					}
+
 					themesWrapper.append(theme);
 					app.setBackgroundAsGif(themes[i].topics[Math.floor(Math.random() * themes[i].topics.length)], $(".theme-option[data-theme='"+ i +"']"));
 					$(".theme-option[data-theme='"+ i +"']").animate({"right": 310 - (i * 100)}, 1000);
@@ -121,6 +126,8 @@ $(document).ready(function(){
 					$(".theme-option").on('click touchstart', function(event) {
 						event.preventDefault();
 						app.selectedTheme = $(this).attr('data-theme');
+						$(".theme-option").removeClass('active');
+						$(this).addClass('active');
 						$("body").removeClass().addClass(themes[app.selectedTheme].name);
 						app.switchToTheme(app.selectedTheme);
 					});
