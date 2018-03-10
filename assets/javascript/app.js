@@ -13,8 +13,7 @@ $(document).ready(function(){
 		},
 		switchToTheme: function(themeNum){
 			$("#topic-input").val('');
-			$("#gifContent").empty();
-			$('.buttons').empty();
+			$("#gifContent, .buttons").empty();
 			$("#input-form label").text(themes[app.selectedTheme].prompt);
 			$("#input-form input[type='text']").attr('placeholder',themes[app.selectedTheme].suggestion);
 			for (var i = 0; i < themes[app.selectedTheme].topics.length; i++) {
@@ -30,14 +29,13 @@ $(document).ready(function(){
 			// Remove listener from existing buttons and setup new listener on all buttons
 			$('.buttons button').off().on('click touchstart', function(event) {
 				event.preventDefault();
-				$("#gifContent").empty();
-				$("#gifContent").hide();
+				$("#gifContent").empty().hide();
 				$('.buttons button').removeClass('active');
 				$(this).addClass('active');
-				app.getGifsOf($(this).text(),10);
+				app.displayGifs($(this).text(),10);
 			});
 		},
-		getGifsOf: function(item,count){
+		displayGifs: function(item,count){
 			// Setup Query String
 			const api = "GNMNbc2t00Lgf7QWChNs9lquU7xNpDdp";
 			let offset = Math.floor(Math.random() * 101);
@@ -88,7 +86,7 @@ $(document).ready(function(){
 				$("#gifContent").fadeIn(1000);
 			});	
 		},
-		setBackgroundAsGif: function(item, el){
+		setGifAsBackground: function(item, el){
 			const api = "GNMNbc2t00Lgf7QWChNs9lquU7xNpDdp";
 			let offset = Math.floor(Math.random() * 101);
 			let queryURL = "https://api.giphy.com/v1/gifs/search?q="+ item;
@@ -110,6 +108,7 @@ $(document).ready(function(){
 			});
 		},
 		showThemeButtons: function(){
+			const launchSpeed = 200;
 			const themesWrapper = $("<ul class='themes'>");
 			$(".link-details").append(themesWrapper);
 			var launch;
@@ -121,7 +120,7 @@ $(document).ready(function(){
 					}
 
 					themesWrapper.append(theme);
-					app.setBackgroundAsGif(themes[i].topics[Math.floor(Math.random() * themes[i].topics.length)], $(".theme-option[data-theme='"+ i +"']"));
+					app.setGifAsBackground(themes[i].topics[Math.floor(Math.random() * themes[i].topics.length)], $(".theme-option[data-theme='"+ i +"']"));
 					$(".theme-option[data-theme='"+ i +"']").animate({"right": 310 - (i * 100)}, 1000);
 				
 					$(".theme-option").on('click touchstart', function(event) {
@@ -132,7 +131,7 @@ $(document).ready(function(){
 						$("body").removeClass().addClass(themes[app.selectedTheme].name);
 						app.switchToTheme(app.selectedTheme);
 					});
-				},200 * i);
+				},launchSpeed * i);
 			}
 		},
 		showAbout: function () {
@@ -186,7 +185,7 @@ $(document).ready(function(){
 	// Event Handler for adding a new Topic
 	$('#addTopic').on('click', function(event) {
 		event.preventDefault();
-		const selectedTopic = $('#topic-input').val();
+		const selectedTopic = $('#topic-input').val().trim();
 		if (selectedTopic){
 			app.addTopicButton(selectedTopic);
 		}
