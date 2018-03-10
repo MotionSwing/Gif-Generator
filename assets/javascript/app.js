@@ -132,7 +132,7 @@ $(document).ready(function(){
 						$("body").removeClass().addClass(themes[app.selectedTheme].name);
 						app.switchToTheme(app.selectedTheme);
 					});
-				},750 * i);
+				},200 * i);
 			}
 		},
 		showAbout: function () {
