@@ -31,6 +31,7 @@ $(document).ready(function(){
 			$('.buttons button').off().on('click touchstart', function(event) {
 				event.preventDefault();
 				$("#gifContent").empty();
+				$("#gifContent").hide();
 				$('.buttons button').removeClass('active');
 				$(this).addClass('active');
 				app.getGifsOf($(this).text(),10);
@@ -83,8 +84,8 @@ $(document).ready(function(){
 					const figCaption = $("<figcaption>").text("Rating: " + response.data[i].rating);
 					const fig = $("<figure>").append(figCaption, img);
 					$("#gifContent").append(fig);
-
 				}
+				$("#gifContent").fadeIn(1000);
 			});	
 		},
 		setBackgroundAsGif: function(item, el){
